@@ -7,12 +7,16 @@ A collection of awesome examples and tips regarding KubeFlow Pipeline.
 	<!-- - [ContainerOp](/examples/v1/container_op) -->
 	- [ResourceOp](/examples/v1/resource_op)
 	<!-- - [VolumeOp](/examples/v1/volume_op) -->
-	<!-- - [Condition](/examples/v1/condition) -->
+	- [Condition](/examples/v1/condition)
 	- [ExitHandler](/examples/v1/exithandler)
 	- [ParallelFor](/examples/v1/parallel_for)
 
 
 ## Tips
+ - [func_to_container_op](#func_to_container_op)
+ - [Condition](#condition)
+ - [ExitHandler](#exithandler)
+ - [ParallelFor](#parallelfor)
 
 ### [func_to_container_op](https://kubeflow-pipelines.readthedocs.io/en/latest/source/kfp.components.html#kfp.components.func_to_container_op)
 
@@ -25,6 +29,18 @@ You can specify additional packages as `package_to_install`. This enables to use
 slack_post_op = func_to_container_op(slack_post, packages_to_install=["slack_sdk"])
 ```
 
+### [Condition](https://kubeflow-pipelines.readthedocs.io/en/latest/source/kfp.dsl.html#kfp.dsl.Condition)
+
+You can use `dsl.Condition` like an if statement
+
+#### [Example](/examples/v1/condition/flip_coint.py)
+
+```python
+with dsl.Condition(flip_task.output == "heads"):
+	print_op("You got heads!!")
+```
+
+
 ### [ExitHandler](https://kubeflow-pipelines.readthedocs.io/en/latest/source/kfp.dsl.html#kfp.dsl.ExitHandler)
 
 ExitHandler will be executed whether the pipeline succeeds or fails.
@@ -34,8 +50,8 @@ ExitHandler will be executed whether the pipeline succeeds or fails.
 ```python
 exit_op = ContainerOp(...)
 with ExitHandler(exit_op):
-  op1 = ContainerOp(...)
-  op2 = ContainerOp(...)
+	op1 = ContainerOp(...)
+	op2 = ContainerOp(...)
 ```
 
 Note: ExitHandler requires ContainerOp as a argument, not ResourceOp or something else.
@@ -52,8 +68,8 @@ In this case op1 would be executed twice, once with case `args=['echo 1']` and o
 
 ```python
 with dsl.ParallelFor([{'apple': 2, 'banana': 4}, {'apple': 3, 'banana': 20}]) as item:
-  op1 = ContainerOp(..., args=['echo apple:{}'.format(item.apple)])
-  op2 = ContainerOp(..., args=['echo banana:{}'.format(item.banana])
+	op1 = ContainerOp(..., args=['echo apple:{}'.format(item.apple)])
+	op2 = ContainerOp(..., args=['echo banana:{}'.format(item.banana])
 ```
 
 #### [Example2]((/examples/v1/parallel_for/parallel.py))
