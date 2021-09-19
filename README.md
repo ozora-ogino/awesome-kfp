@@ -1,7 +1,7 @@
 # [WIP] Awesome KubeFlow Pipeline [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 A collection of awesome examples and tips regarding KubeFlow Pipeline.
 
-## Examples:
+## Examples
  - [v1](/examples/v1)
 	- [func_to_container_op](/examples/v1/func_to_container_op)
 	<!-- - [ContainerOp](/examples/v1/container_op) -->
@@ -20,7 +20,7 @@ A collection of awesome examples and tips regarding KubeFlow Pipeline.
 
 ### [func_to_container_op](https://kubeflow-pipelines.readthedocs.io/en/latest/source/kfp.components.html#kfp.components.func_to_container_op)
 
-### Use additional package
+#### Use additional package
 
 You can specify additional packages as `package_to_install`. This enables to use additional packages without building new docker image.
 
@@ -31,12 +31,13 @@ slack_post_op = func_to_container_op(slack_post, packages_to_install=["slack_sdk
 
 ### [Condition](https://kubeflow-pipelines.readthedocs.io/en/latest/source/kfp.dsl.html#kfp.dsl.Condition)
 
-You can use `dsl.Condition` like an if statement
+You can use `dsl.Condition` like an if statement in a pipeline function.
 
 #### [Example](/examples/v1/condition/flip_coint.py)
 
 ```python
 with dsl.Condition(flip_task.output == "heads"):
+	# Will be executed in the case flip_task.output is 'heads'.
 	print_op("You got heads!!")
 ```
 
@@ -61,7 +62,7 @@ If you want to create/delete/apply k8s resources with ExitHandler, please see [t
 
 ParallelFor represents a parallel for loop over a static set of items.
 
-#### Example1:
+#### Example:
 
 Simple literal example.
 In this case op1 would be executed twice, once with case `args=['echo 1']` and once with case `args=['echo 2']`
@@ -94,3 +95,13 @@ def pipeline(parallelism: int):
 ```
 
 Please refer [official document](https://kubeflow-pipelines.readthedocs.io/en/latest/source/kfp.dsl.html#kfp.dsl.PipelineConf.set_parallelism) or [our example](/examples/v1/parallel_for/parallel.py).
+
+
+## Contributing
+
+Interested in contributing? Awesome😎
+Please create PR and let us review!
+
+In this repository we follow the Google's best practices;
+ - [The CL author’s guide to getting through code review](https://google.github.io/eng-practices/review/developer/)
+ - [Python Style Guide](https://google.github.io/styleguide/pyguide.html)

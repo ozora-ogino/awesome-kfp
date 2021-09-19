@@ -22,8 +22,10 @@ def print_op(msg: str):
 def pipeline():
     flip_task = flip_coin_op()
     with dsl.Condition(flip_task.output == "heads"):
+        # Will be executed in the case flip_task.output is 'heads'.
         print_op("You got heads!!")
     with dsl.Condition(flip_task.output == "tails"):
+        # Will be executed in the case flip_task.output is 'tails'.
         print_op("You got tails!!")
 
 
