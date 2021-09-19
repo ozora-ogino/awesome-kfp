@@ -4,12 +4,12 @@ from kfp.components import func_to_container_op
 
 
 @func_to_container_op
-def list_generator_op(n: int) -> str:
+def list_generator_op(parallelism: int) -> str:
     """Generate list for parallel"""
     import json
 
     # JSON payload is required for ParallelFor
-    return json.dumps([x for x in range(n)])
+    return json.dumps([x for x in range(parallelism)])
 
 
 @func_to_container_op
@@ -22,13 +22,17 @@ def print_op(msg: str):
     name="ParallelFor example",
     description="Shows how to use dsl.ParallelFor()",
 )
-def pipeline(n: int):
-    list_task = list_generator_op(n)
-    parallel_taks = dsl.ParallelFor(list_task.output)
-    with parallel_taks as msg:
+def pipeline(parallelism: int):
+    # set the number of parallel
+    default_conf = kfp.dsl.get_pipeline_conf()
+    default_conf.set_parallelism(2)
+
+    list_task = list_generator_op(parallelism)
+    parallel_tasks = dsl.ParallelFor(list_task.output)
+    with parallel_tasks as msg:
         print_op(msg)
 
-    print_op("Finished").after(parallel_taks)
+    print_op("Finished").after(parallel_tasks)
 
 
 if __name__ == "__main__":
