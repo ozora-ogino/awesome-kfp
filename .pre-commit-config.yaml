@@ -23,10 +23,3 @@ repos:
     hooks:
       - id: check-added-large-files
         args: ["--maxkb=100"]
-  - repo: local
-    hooks:
-      - id: branch-name-enforcement
-        name: branch-name-enforcement
-        language: python
-        stages: [push]
-        entry: hooks/enforce_branch_name.py
