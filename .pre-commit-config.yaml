@@ -1,8 +1,5 @@
 # Define the pre-commit hooks that will be established with pip's 'pre-commit' package.
 # https://pre-commit.com/
-# NOTE: we define individual tool rules in pyproject.toml to be consistent in CI and local PCs.
-
-# TODO: always double-check that we are using the same versions in requirements.txt!
 
 default_language_version:
   python: python3.8
