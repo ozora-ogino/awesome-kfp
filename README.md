@@ -1,4 +1,4 @@
-# [WIP] Awesome KubeFlow Pipeline [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
+# Awesome KubeFlow Pipeline [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 A collection of awesome examples and tips regarding KubeFlow Pipeline.
 
 ## Examples
@@ -100,7 +100,7 @@ Please refer [official document](https://kubeflow-pipelines.readthedocs.io/en/la
 
 
 ### Caching
-I recommend to read KubeFlow official documents about caching.
+We recommend to read KubeFlow official documents about caching.
  - [Caching v1](https://www.kubeflow.org/docs/components/pipelines/caching/#disablingenabling-caching)
  - [Cacing v2](https://www.kubeflow.org/docs/components/pipelines/caching-v2/)
 
