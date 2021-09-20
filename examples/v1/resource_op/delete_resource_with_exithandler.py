@@ -61,7 +61,7 @@ def cleanup_op(resources: Iterable[Dict]) -> dsl.ContainerOp:
 def pipeline():
     exit_task = cleanup_op([redis1, redis2])
     with dsl.ExitHandler(exit_task):
-        _ = kfp.dsl.ResourceOp(
+        kfp.dsl.ResourceOp(
             name="create-redis1",
             k8s_resource=redis1,
             action="create",
@@ -69,7 +69,7 @@ def pipeline():
             failure_condition="status.phase=Failed",
             attribute_outputs={"name": "{.metadata.name}"},
         )
-        _ = kfp.dsl.ResourceOp(
+        kfp.dsl.ResourceOp(
             name="create-redis2",
             k8s_resource=redis2,
             action="create",
